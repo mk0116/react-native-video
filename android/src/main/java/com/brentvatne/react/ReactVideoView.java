@@ -41,6 +41,7 @@ import java.lang.Math;
 import java.math.BigDecimal;
 
 import javax.annotation.Nullable;
+import static android.media.MediaPlayer.SEEK_CLOSEST_SYNC;
 
 @SuppressLint("ViewConstructor")
 public class ReactVideoView extends ScalableVideoView implements
@@ -625,7 +626,7 @@ public class ReactVideoView extends ScalableVideoView implements
     public void seekTo(int msec) {
         if (mMediaPlayerValid) {
             mSeekTime = msec;
-            super.seekTo(msec);
+            mMediaPlayer.seekTo(msec, SEEK_CLOSEST_SYNC);
             if (isCompleted && mVideoDuration != 0 && msec < mVideoDuration) {
                 isCompleted = false;
             }
